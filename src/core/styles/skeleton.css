@@ -1,0 +1,42 @@
+/* ============================================================
+   Skeleton — Shimmer placeholder effect
+   ============================================================ */
+
+.ul-skeleton {
+  width: 100%;
+  height: var(--ul-size);
+  background: linear-gradient(
+    90deg,
+    var(--ul-secondary-color) 25%,
+    rgba(59, 130, 246, 0.05) 50%,
+    var(--ul-secondary-color) 75%
+  );
+  background-size: 200% 100%;
+  border-radius: 6px;
+  animation: ul-shimmer calc(var(--ul-speed) * 1.5) ease-in-out infinite;
+}
+
+.ul-skeleton--text {
+  height: calc(var(--ul-size) * 0.4);
+  border-radius: 4px;
+}
+
+.ul-skeleton--circle {
+  width: var(--ul-size);
+  height: var(--ul-size);
+  border-radius: 50%;
+}
+
+.ul-skeleton--rect {
+  height: calc(var(--ul-size) * 2.5);
+  border-radius: 8px;
+}
+
+@keyframes ul-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

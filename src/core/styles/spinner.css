@@ -1,0 +1,21 @@
+/* ============================================================
+   Spinner — A classic rotating ring loader
+   ============================================================ */
+
+.ul-spinner {
+  width: var(--ul-size);
+  height: var(--ul-size);
+  border: var(--ul-border-width) solid var(--ul-secondary-color);
+  border-top-color: var(--ul-color);
+  border-radius: 50%;
+  animation: ul-spin var(--ul-speed) linear infinite;
+}
+
+@keyframes ul-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

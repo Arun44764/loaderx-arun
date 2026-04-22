@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LoaderX-Arun — 210+ UI Loaders</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../dist/style.css" />
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--bg:#080d1a;--surface:rgba(255,255,255,.04);--border:rgba(255,255,255,.08);--text:#e2e8f0;--muted:#64748b;--accent:#3b82f6}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+    body::before{content:'';position:fixed;top:-30%;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(ellipse,rgba(59,130,246,.1) 0%,transparent 70%);pointer-events:none;z-index:0}
+    .wrapper{max-width:1200px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1}
+
+    /* Hero */
+    .hero{text-align:center;padding:4rem 1rem 2.5rem}
+    .badge{display:inline-block;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3);color:#93c5fd;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.35rem 1rem;border-radius:99px;margin-bottom:1.2rem}
+    h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:800;background:linear-gradient(135deg,#e2e8f0 30%,#3b82f6 70%,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.8rem;line-height:1.1}
+    .hero p{color:var(--muted);font-size:1.05rem;max-width:520px;margin:0 auto 2rem;line-height:1.7}
+
+    /* Stats */
+    .stats{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem}
+    .stat{text-align:center}
+    .stat-num{font-size:2rem;font-weight:800;color:var(--accent);display:block;line-height:1}
+    .stat-lbl{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+
+    /* Controls */
+    .controls{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin-bottom:2rem;padding:1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:16px}
+    .search-wrap{flex:1;min-width:200px;position:relative}
+    .search-wrap input{width:100%;padding:.7rem 1rem .7rem 2.5rem;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:.9rem;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s}
+    .search-wrap input:focus{border-color:var(--accent)}
+    .search-wrap::before{content:'🔍';position:absolute;left:.75rem;top:50%;transform:translateY(-50%);font-size:.85rem}
+    .filter-tabs{display:flex;gap:.4rem;flex-wrap:wrap}
+    .filter-btn{background:var(--surface);border:1px solid var(--border);color:var(--muted);font-family:'Inter',sans-serif;font-size:.78rem;font-weight:600;padding:.4rem .9rem;border-radius:8px;cursor:pointer;transition:all .15s}
+    .filter-btn:hover,.filter-btn.active{background:rgba(59,130,246,.15);border-color:rgba(59,130,246,.4);color:#93c5fd}
+    .color-picker{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--muted)}
+    .color-picker input[type=color]{width:32px;height:32px;border:none;border-radius:6px;cursor:pointer;background:none;padding:0}
+
+    /* Grid */
+    .loader-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;margin-bottom:4rem}
+    .loader-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem 1rem;display:flex;flex-direction:column;align-items:center;gap:1rem;transition:transform .2s,border-color .2s,box-shadow .2s;cursor:default;position:relative}
+    .loader-card:hover{transform:translateY(-4px);border-color:rgba(59,130,246,.4);box-shadow:0 8px 24px rgba(59,130,246,.1)}
+    .loader-card.hidden{display:none}
+    .loader-area{min-height:50px;display:flex;align-items:center;justify-content:center;width:100%}
+    .loader-area.wide{width:100%;min-height:30px}
+    .loader-name{font-size:.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;text-align:center;word-break:break-all}
+    .loader-cat{position:absolute;top:.5rem;right:.5rem;font-size:.6rem;font-weight:700;background:rgba(59,130,246,.15);color:#93c5fd;border-radius:4px;padding:.15rem .35rem;text-transform:uppercase;letter-spacing:.05em}
+    .no-results{grid-column:1/-1;text-align:center;padding:4rem;color:var(--muted);font-size:1rem}
+
+    /* Footer */
+    footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.82rem;border-top:1px solid var(--border)}
+    footer strong{color:var(--text)}
+    hr{border:none;border-top:1px solid var(--border)}
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="hero">
+    <div class="badge">v1.0.0 · Zero Dependencies · Tree-shakable</div>
+    <h1>LoaderX-Arun</h1>
+    <p><span id="heroCount"></span> animated UI loaders for every framework. Pure CSS core, React components, Web Components, and CDN support.</p>
+    <div class="stats">
+      <div class="stat"><span class="stat-num" id="totalCount">210+</span><span class="stat-lbl">Loaders</span></div>
+      <div class="stat"><span class="stat-num">8</span><span class="stat-lbl">Categories</span></div>
+      <div class="stat"><span class="stat-num">0</span><span class="stat-lbl">Dependencies</span></div>
+      <div class="stat"><span class="stat-num">4</span><span class="stat-lbl">Frameworks</span></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="search-wrap">
+      <input type="text" id="searchInput" placeholder="Search loaders..." oninput="filterLoaders()" />
+    </div>
+    <div class="filter-tabs" id="filterTabs">
+      <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+      <button class="filter-btn" onclick="setFilter('spinners',this)">🌀 Spinners</button>
+      <button class="filter-btn" onclick="setFilter('dots',this)">⚫ Dots</button>
+      <button class="filter-btn" onclick="setFilter('bars',this)">📊 Bars</button>
+      <button class="filter-btn" onclick="setFilter('shapes',this)">🔷 Shapes</button>
+      <button class="filter-btn" onclick="setFilter('gradients',this)">✨ Glow</button>
+      <button class="filter-btn" onclick="setFilter('tech',this)">💻 Tech</button>
+      <button class="filter-btn" onclick="setFilter('nature',this)">🌿 Nature</button>
+      <button class="filter-btn" onclick="setFilter('creative',this)">🎨 Creative</button>
+    </div>
+    <div class="color-picker">
+      <span>Color:</span>
+      <input type="color" id="colorPicker" value="#3b82f6" oninput="changeColor(this.value)" title="Change loader color" />
+    </div>
+  </div>
+
+  <div class="loader-grid" id="loaderGrid"></div>
+</div>
+<footer><div class="wrapper"><strong>LoaderX-Arun</strong> · MIT License · Works with React, Vue, Angular, Vanilla HTML &amp; CDN</div></footer>
+
+<script>
+// All 210+ loaders: [name, category, innerHTML]
+// innerHTML: '' = just sr-only label, else inner HTML
+const LOADERS = [
+  // ── Original 8 ──
+  ['spinner','spinners',''],
+  ['dots','dots','<span class="ul-dots__dot"></span>'],
+  ['pulse','spinners',''],
+  ['bars','bars','<span class="ul-bars__bar"></span><span class="ul-bars__bar"></span><span class="ul-bars__bar"></span><span class="ul-bars__bar"></span><span class="ul-bars__bar"></span>'],
+  ['ring','spinners',''],
+  ['skeleton','shapes',''],
+  ['progress','bars',''],
+  ['orbit','spinners',''],
+
+  // ── Advanced Spinners ──
+  ['spinner-dual','spinners',''],
+  ['spinner-triple','spinners','<span class="ul-spinner-triple__ring"></span>'],
+  ['spinner-chase','spinners','<span class="ul-spinner-chase__dot"></span><span class="ul-spinner-chase__dot"></span><span class="ul-spinner-chase__dot"></span><span class="ul-spinner-chase__dot"></span><span class="ul-spinner-chase__dot"></span><span class="ul-spinner-chase__dot"></span>'],
+  ['spinner-plane','spinners',''],
+  ['spinner-fold','spinners','<span class="ul-spinner-fold__cube"></span><span class="ul-spinner-fold__cube"></span><span class="ul-spinner-fold__cube"></span><span class="ul-spinner-fold__cube"></span>'],
+  ['ring-comet','spinners',''],
+  ['ring-dashed','spinners',''],
+  ['ring-gradient','spinners',''],
+  ['ring-clock','spinners',''],
+  ['ring-meteor','spinners',''],
+  ['ring-solar','spinners','<span class="ul-ring-solar__planet"></span><span class="ul-ring-solar__planet"></span>'],
+  ['ring-satellite','spinners',''],
+  ['ring-neon','spinners',''],
+  ['ring-pulse-glow','spinners',''],
+  ['ring-stretch','spinners',''],
+  ['gyro','spinners',''],
+  ['vortex','spinners',''],
+  ['cyclone','spinners',''],
+  ['helix','spinners',''],
+  ['compass','spinners',''],
+  ['orbit-dual','spinners',''],
+  ['orbit-triple','spinners','<span class="ul-d ul-d1"></span><span class="ul-d ul-d2"></span><span class="ul-d ul-d3"></span>'],
+  ['orbit-comet','spinners',''],
+  ['spiral','spinners',''],
+  ['whirlwind','spinners',''],
+
+  // ── Dots ──
+  ['dots-flashing','dots','<span class="ul-d"></span>'],
+  ['dots-carousel','dots','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['dots-elastic','dots','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['dots-typing','dots','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['dots-windmill','dots','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['dots-grid','dots','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['dots-wave','dots','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['dots-fade','dots','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['dots-spread','dots','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['dots-bricks','dots','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['bubble-float','dots',''],
+  ['bubbles-rise','dots','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['fireflies','dots','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['dot-bounce','dots',''],
+  ['dot-ping','dots','<span class="ul-d"></span>'],
+  ['dot-ripple','dots','<span class="ul-d"></span>'],
+  ['dot-pendulum','dots',''],
+  ['constellation','dots','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['rain-fall','dots','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['snow-fall','dots','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['dot-chase','dots',''],
+
+  // ── Bars ──
+  ['bars-wave','bars','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['equalizer','bars','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['waveform','bars','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['heartbeat-line','bars',''],
+  ['signal-bars','bars','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['spectrum','bars','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['metronome','bars',''],
+  ['bars-flip','bars','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['bars-zoom','bars','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['line-scale','bars','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['progress-glow','bars',''],
+  ['progress-stripe','bars',''],
+  ['progress-elastic','bars',''],
+  ['bar-gradient','bars',''],
+  ['bars-fade','bars','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['audio-wave','bars','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['frequency','bars','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['line-bounce','bars','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['bar-slide','bars',''],
+  ['line-wave','bars',''],
+
+  // ── Shapes ──
+  ['square-spin','shapes',''],
+  ['square-fold','shapes','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['cube-3d','shapes','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['diamond-spin','shapes',''],
+  ['hexagon','shapes',''],
+  ['triangle-spin','shapes',''],
+  ['cross-spin','shapes',''],
+  ['star-spin','shapes',''],
+  ['star-pulse','shapes',''],
+  ['infinity','shapes',''],
+  ['gear','shapes',''],
+  ['gear-dual','shapes',''],
+  ['clock-face','shapes',''],
+  ['plus-spin','shapes',''],
+  ['circle-draw','shapes',''],
+  ['arc-rotate','shapes',''],
+  ['donut','shapes',''],
+  ['crescent','shapes',''],
+  ['pentagon','shapes',''],
+  ['octagon','shapes',''],
+  ['spiral-draw','shapes',''],
+  ['morph-shape','shapes',''],
+  ['square-morph','shapes',''],
+  ['flip-3d','shapes',''],
+  ['figure-eight','shapes',''],
+
+  // ── Gradients / Glow ──
+  ['gradient-spin','gradients',''],
+  ['gradient-pulse','gradients',''],
+  ['rainbow-spin','gradients',''],
+  ['rainbow-pulse','gradients',''],
+  ['neon-ring','gradients',''],
+  ['neon-dots','gradients','<span class="ul-d"></span>'],
+  ['neon-line','gradients',''],
+  ['neon-pulse','gradients',''],
+  ['neon-glow','gradients',''],
+  ['plasma','gradients',''],
+  ['plasma-ring','gradients',''],
+  ['aurora','gradients',''],
+  ['galaxy','gradients',''],
+  ['laser','gradients',''],
+  ['electric-arc','gradients',''],
+  ['fire-ring','gradients',''],
+  ['holographic','gradients',''],
+  ['iridescent','gradients',''],
+  ['chrome','gradients',''],
+  ['aurora-wave','gradients',''],
+  ['prismatic','gradients',''],
+  ['gradient-wave','gradients',''],
+
+  // ── Tech ──
+  ['circuit','tech',''],
+  ['wifi','tech','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['battery','tech',''],
+  ['cpu','tech',''],
+  ['atom','tech','<span class="ul-ring-atom"></span><span class="ul-ring-atom"></span><span class="ul-ring-atom"></span>'],
+  ['dna','tech','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['binary','tech',''],
+  ['terminal','tech',''],
+  ['network','tech','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['radar','tech',''],
+  ['sonar','tech','<span class="ul-d"></span>'],
+  ['scan-line','tech',''],
+  ['glitch','tech',''],
+  ['satellite','tech',''],
+  ['chip-activity','tech','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['data-stream','tech','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['ai-pulse','tech','<span class="ul-d"></span>'],
+  ['biometric','tech',''],
+  ['server','tech','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+
+  // ── Nature ──
+  ['wave-ocean','nature',''],
+  ['ripple-water','nature','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['fire-flame','nature',''],
+  ['smoke','nature','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['rain-drops','nature','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['snowflake','nature','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['bubble-rise','nature','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['sun-rays','nature','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['comet','nature',''],
+  ['lightning','nature',''],
+  ['tornado','nature','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['breath','nature',''],
+  ['crystal','nature','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['blossom','nature','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['tide','nature',''],
+  ['wind','nature','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+
+  // ── Creative ──
+  ['pacman','creative',''],
+  ['bouncing-ball','creative',''],
+  ['pendulum','creative',''],
+  ['jelly','creative',''],
+  ['rubber','creative',''],
+  ['spring','creative',''],
+  ['yo-yo','creative',''],
+  ['coin','creative',''],
+  ['hourglass','creative',''],
+  ['magic','creative','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['refresh','creative',''],
+  ['upload','creative',''],
+  ['sync','creative',''],
+  ['typewriter','creative',''],
+  ['ellipsis','creative','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['download','creative',''],
+  ['swipe','creative',''],
+  ['confetti','creative','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['tap-ripple','creative','<span class="ul-d"></span>'],
+  ['countdown','creative',''],
+  ['firework','creative','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+
+  // ── Extra Pack ──
+  ['ring-split','spinners',''],
+  ['ring-double','spinners',''],
+  ['windmill','spinners','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['fan','spinners','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['dots-orbit','dots','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['dot-trail','dots','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['dots-clock','dots','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['bar-fill','bars',''],
+  ['bars-random','bars','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['led-bar','bars','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['progress-radial','shapes',''],
+  ['yin-yang','shapes',''],
+  ['target','shapes','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['reactor','gradients','<span class="ul-d"></span>'],
+  ['pulse-rings','gradients','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['orbit-glow','gradients',''],
+  ['matrix','tech','<span class="ul-d">1</span><span class="ul-d">0</span><span class="ul-d">1</span><span class="ul-d">1</span><span class="ul-d">0</span>'],
+  ['power-btn','tech',''],
+  ['qr-scan','tech',''],
+  ['meteor-shower','nature','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['leaf-fall','nature','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['petal-spin','nature','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['heart-beat','creative',''],
+  ['clock-spin','creative',''],
+  ['dice','creative','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['flip-loader','creative','<span class="ul-d"></span><span class="ul-d"></span>'],
+  ['typing-cursor','creative',''],
+  ['circular-progress','shapes',''],
+  ['dual-ring-pulse','spinners',''],
+  ['stretching','bars','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['bouncing-bar','creative',''],
+  ['spiral-in','spinners','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['ripple-send','creative','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+  ['dot-trail','dots','<span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span><span class="ul-d"></span>'],
+];
+
+// Wide loaders (need full width)
+const WIDE = new Set(['progress','heartbeat-line','progress-glow','progress-stripe','progress-elastic',
+  'bar-gradient','bar-slide','line-wave','neon-line','gradient-wave','aurora-wave',
+  'wave-ocean','tide','wind','skeleton','bar-fill','led-bar','bouncing-bar']);
+
+const CSS_CLASS_MAP = {
+  'clock-face': 'ul-clock-face', 'scan-line': 'ul-scan-line',
+  'heartbeat-line': 'ul-heartbeat-line', 'signal-bars': 'ul-signal-bars',
+  'chip-activity': 'ul-chip-activity', 'data-stream': 'ul-data-stream',
+  'ai-pulse': 'ul-ai-pulse', 'bubble-float': 'ul-bubble-float',
+  'bubbles-rise': 'ul-bubbles-rise', 'bubble-rise': 'ul-bubble-rise',
+  'rain-fall': 'ul-rain-fall', 'snow-fall': 'ul-snow-fall',
+  'dot-bounce': 'ul-dot-bounce', 'dot-ping': 'ul-dot-ping',
+  'dot-ripple': 'ul-dot-ripple', 'dot-pendulum': 'ul-dot-pendulum',
+  'dot-chase': 'ul-dot-chase', 'fire-flame': 'ul-fire-flame',
+  'wave-ocean': 'ul-wave-ocean', 'ripple-water': 'ul-ripple-water',
+  'rain-drops': 'ul-rain-drops', 'sun-rays': 'ul-sun-rays',
+  'audio-wave': 'ul-audio-wave', 'line-wave': 'ul-line-wave',
+  'line-bounce': 'ul-line-bounce', 'line-scale': 'ul-line-scale',
+  'bar-slide': 'ul-bar-slide', 'bar-gradient': 'ul-bar-gradient',
+  'bars-flip': 'ul-bars-flip', 'bars-zoom': 'ul-bars-zoom',
+  'bars-fade': 'ul-bars-fade', 'bars-wave': 'ul-bars-wave',
+  'bars-fade': 'ul-bars-fade',
+  'tap-ripple': 'ul-tap-ripple', 'bouncing-ball': 'ul-bouncing-ball',
+  'square-spin': 'ul-square-spin','square-fold':'ul-square-fold',
+  'square-morph':'ul-square-morph','cube-3d':'ul-cube-3d',
+  'diamond-spin':'ul-diamond-spin','triangle-spin':'ul-triangle-spin',
+  'cross-spin':'ul-cross-spin','star-spin':'ul-star-spin','star-pulse':'ul-star-pulse',
+  'gear-dual':'ul-gear-dual','plus-spin':'ul-plus-spin','circle-draw':'ul-circle-draw',
+  'arc-rotate':'ul-arc-rotate','spiral-draw':'ul-spiral-draw',
+  'morph-shape':'ul-morph-shape','flip-3d':'ul-flip-3d','figure-eight':'ul-figure-eight',
+  'gradient-spin':'ul-gradient-spin','gradient-pulse':'ul-gradient-pulse',
+  'gradient-wave':'ul-gradient-wave','rainbow-spin':'ul-rainbow-spin',
+  'rainbow-pulse':'ul-rainbow-pulse','neon-ring':'ul-neon-ring',
+  'neon-dots':'ul-neon-dots','neon-line':'ul-neon-line','neon-pulse':'ul-neon-pulse',
+  'neon-glow':'ul-neon-glow','plasma-ring':'ul-plasma-ring','fire-ring':'ul-fire-ring',
+  'electric-arc':'ul-electric-arc','aurora-wave':'ul-aurora-wave',
+  'spinner-dual':'ul-spinner-dual','spinner-triple':'ul-spinner-triple',
+  'spinner-chase':'ul-spinner-chase','spinner-plane':'ul-spinner-plane',
+  'spinner-fold':'ul-spinner-fold','ring-comet':'ul-ring-comet',
+  'ring-dashed':'ul-ring-dashed','ring-gradient':'ul-ring-gradient',
+  'ring-clock':'ul-ring-clock','ring-meteor':'ul-ring-meteor',
+  'ring-solar':'ul-ring-solar','ring-satellite':'ul-ring-satellite',
+  'ring-neon':'ul-ring-neon','ring-pulse-glow':'ul-ring-pulse-glow',
+  'ring-stretch':'ul-ring-stretch','orbit-dual':'ul-orbit-dual',
+  'orbit-triple':'ul-orbit-triple','orbit-comet':'ul-orbit-comet',
+  'dots-flashing':'ul-dots-flashing','dots-carousel':'ul-dots-carousel',
+  'dots-elastic':'ul-dots-elastic','dots-typing':'ul-dots-typing',
+  'dots-windmill':'ul-dots-windmill','dots-grid':'ul-dots-grid',
+  'dots-wave':'ul-dots-wave','dots-fade':'ul-dots-fade',
+  'dots-spread':'ul-dots-spread','dots-bricks':'ul-dots-bricks',
+  'progress-glow':'ul-progress-glow','progress-stripe':'ul-progress-stripe',
+  'progress-elastic':'ul-progress-elastic',
+  'ring-split':'ul-ring-split','ring-double':'ul-ring-double',
+  'dots-orbit':'ul-dots-orbit','dot-trail':'ul-dot-trail','dots-clock':'ul-dots-clock',
+  'bar-fill':'ul-bar-fill','bars-random':'ul-bars-random','led-bar':'ul-led-bar',
+  'progress-radial':'ul-progress-radial','yin-yang':'ul-yin-yang',
+  'pulse-rings':'ul-pulse-rings','orbit-glow':'ul-orbit-glow',
+  'power-btn':'ul-power-btn','qr-scan':'ul-qr-scan',
+  'meteor-shower':'ul-meteor-shower','leaf-fall':'ul-leaf-fall','petal-spin':'ul-petal-spin',
+  'heart-beat':'ul-heart-beat','clock-spin':'ul-clock-spin',
+  'flip-loader':'ul-flip-loader','typing-cursor':'ul-typing-cursor',
+  'circular-progress':'ul-circular-progress','dual-ring-pulse':'ul-dual-ring-pulse',
+  'stretching':'ul-stretching','bouncing-bar':'ul-bouncing-bar','spiral-in':'ul-spiral-in',
+  'ripple-send':'ul-ripple-send',
+};
+
+function getCssClass(name) {
+  return CSS_CLASS_MAP[name] || `ul-${name}`;
+}
+
+let currentFilter = 'all';
+let currentColor = '#3b82f6';
+
+function buildGrid() {
+  const grid = document.getElementById('loaderGrid');
+  grid.innerHTML = '';
+  LOADERS.forEach(([name, cat, inner]) => {
+    const cssClass = getCssClass(name);
+    const isWide = WIDE.has(name);
+    const card = document.createElement('div');
+    card.className = 'loader-card';
+    card.dataset.name = name;
+    card.dataset.cat = cat;
+    card.innerHTML = `
+      <div class="loader-cat">${cat}</div>
+      <div class="loader-area${isWide?' wide':''}">
+        <div class="ul-loader ${cssClass}" role="status" aria-live="polite" aria-label="Loading" style="${isWide?'width:100%;':''}">
+          ${inner}<span class="ul-sr-only">Loading…</span>
+        </div>
+      </div>
+      <span class="loader-name">${name}</span>`;
+    grid.appendChild(card);
+  });
+  document.getElementById('totalCount').textContent = LOADERS.length + '+';
+}
+
+function filterLoaders() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  let vis = 0;
+  document.querySelectorAll('.loader-card').forEach(c => {
+    const show = (currentFilter === 'all' || c.dataset.cat === currentFilter)
+                 && (!q || c.dataset.name.includes(q));
+    c.classList.toggle('hidden', !show);
+    if (show) vis++;
+  });
+  // no results
+  let nr = document.querySelector('.no-results');
+  if (!vis) {
+    if (!nr) { nr = document.createElement('div'); nr.className = 'no-results'; document.getElementById('loaderGrid').appendChild(nr); }
+    nr.textContent = `No loaders found for "${q}" in "${currentFilter}"`;
+  } else if (nr) nr.remove();
+}
+
+function setFilter(cat, btn) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterLoaders();
+}
+
+function changeColor(color) {
+  currentColor = color;
+  document.querySelectorAll('.loader-card .ul-loader').forEach(el => {
+    el.style.setProperty('--ul-color', color);
+    // Update secondary color to be transparent variant
+    el.style.setProperty('--ul-secondary-color', color + '33');
+  });
+}
+
+buildGrid();
+
+// Set accurate counts everywhere
+const total = LOADERS.length;
+document.getElementById('totalCount').textContent = total;
+document.getElementById('heroCount').textContent = total + '+';
+document.querySelector('.badge').textContent = `v1.0.0 · ${total}+ Loaders · Zero Dependencies`;
+</script>
+</body>
+</html>

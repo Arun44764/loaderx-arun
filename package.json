@@ -1,0 +1,115 @@
+{
+  "name": "loaderx-arun",
+  "version": "1.0.1",
+  "description": "LoaderX by Arun — 210+ zero-dependency, framework-agnostic animated UI loaders for React, Angular, Vue, vanilla JS, and SSR environments.",
+  "type": "module",
+  "main": "./dist/core/index.cjs",
+  "module": "./dist/core/index.js",
+  "types": "./dist/core/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/core/index.d.ts",
+        "default": "./dist/core/index.js"
+      },
+      "require": {
+        "types": "./dist/core/index.d.cts",
+        "default": "./dist/core/index.cjs"
+      }
+    },
+    "./react": {
+      "import": {
+        "types": "./dist/react/index.d.ts",
+        "default": "./dist/react/index.js"
+      },
+      "require": {
+        "types": "./dist/react/index.d.cts",
+        "default": "./dist/react/index.cjs"
+      }
+    },
+    "./web-components": {
+      "import": {
+        "types": "./dist/web-components/index.d.ts",
+        "default": "./dist/web-components/index.js"
+      },
+      "require": {
+        "types": "./dist/web-components/index.d.cts",
+        "default": "./dist/web-components/index.cjs"
+      }
+    },
+    "./style.css": "./dist/style.css",
+    "./dist/style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup && npm run build:css && npm run build:umd",
+    "build:css": "node scripts/build-css.mjs",
+    "build:umd": "rollup -c rollup.config.mjs",
+    "clean": "rimraf dist",
+    "prepublishOnly": "npm run clean && npm run build",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "loader",
+    "spinner",
+    "loading",
+    "ui",
+    "css",
+    "react",
+    "web-components",
+    "angular",
+    "vue",
+    "vanilla",
+    "universal",
+    "accessible",
+    "a11y",
+    "skeleton",
+    "progress",
+    "animation"
+  ],
+  "author": "arunsahani44",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rimraf": "^5.0.5",
+    "rollup": "^4.9.0",
+    "rollup-plugin-postcss": "^4.0.2",
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arun/loaderx-arun"
+  },
+  "homepage": "https://github.com/arun/loaderx-arun#readme",
+  "bugs": {
+    "url": "https://github.com/arun/loaderx-arun/issues"
+  },
+  "sideEffects": [
+    "**/*.css",
+    "./src/web-components/**",
+    "./dist/web-components/index.js",
+    "./dist/web-components/index.cjs"
+  ]
+}

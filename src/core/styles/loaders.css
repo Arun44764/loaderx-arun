@@ -1,0 +1,29 @@
+/* ============================================================
+   Universal Loaders — Aggregated Stylesheet (210+ loaders)
+   Import this single file to get all loader styles.
+   ============================================================ */
+
+/* ── Core variables & base ── */
+@import './variables.css';
+@import './base.css';
+
+/* ── Original 8 loaders ── */
+@import './spinner.css';
+@import './dots.css';
+@import './pulse.css';
+@import './bars.css';
+@import './ring.css';
+@import './skeleton.css';
+@import './progress.css';
+@import './orbit.css';
+
+/* ── Extended loader categories ── */
+@import './spinners-advanced.css';
+@import './dots-advanced.css';
+@import './bars-advanced.css';
+@import './shapes.css';
+@import './gradients.css';
+@import './tech.css';
+@import './nature.css';
+@import './creative.css';
+@import './extra.css';

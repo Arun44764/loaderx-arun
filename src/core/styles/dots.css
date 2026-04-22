@@ -1,0 +1,41 @@
+/* ============================================================
+   Dots — Three bouncing dots
+   ============================================================ */
+
+.ul-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--ul-dot-size) * 0.6);
+  height: var(--ul-size);
+}
+
+.ul-dots::before,
+.ul-dots::after,
+.ul-dots .ul-dots__dot {
+  content: '';
+  display: block;
+  width: var(--ul-dot-size);
+  height: var(--ul-dot-size);
+  border-radius: 50%;
+  background-color: var(--ul-color);
+  animation: ul-bounce var(--ul-speed) ease-in-out infinite;
+}
+
+.ul-dots::after {
+  animation-delay: calc(var(--ul-speed) * 0.16);
+}
+
+.ul-dots .ul-dots__dot {
+  animation-delay: calc(var(--ul-speed) * 0.32);
+}
+
+@keyframes ul-bounce {
+  0%, 80%, 100% {
+    transform: scale(0.6);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

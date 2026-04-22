@@ -1,0 +1,15 @@
+/* ============================================================
+   Universal Loaders — CSS Custom Properties
+   All loaders inherit these variables for easy theming.
+   ============================================================ */
+
+:root {
+  --ul-color: #3b82f6;
+  --ul-size: 40px;
+  --ul-speed: 1s;
+  --ul-secondary-color: rgba(59, 130, 246, 0.2);
+  --ul-border-width: 3px;
+  --ul-dot-size: calc(var(--ul-size) / 4);
+  --ul-bar-width: calc(var(--ul-size) / 8);
+  --ul-bar-height: var(--ul-size);
+}

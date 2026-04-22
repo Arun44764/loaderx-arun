@@ -1,0 +1,41 @@
+/* ============================================================
+   Ring — Dual-ring rotation
+   ============================================================ */
+
+.ul-ring {
+  width: var(--ul-size);
+  height: var(--ul-size);
+  position: relative;
+}
+
+.ul-ring::before,
+.ul-ring::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: var(--ul-border-width) solid transparent;
+}
+
+.ul-ring::before {
+  border-top-color: var(--ul-color);
+  border-bottom-color: var(--ul-color);
+  animation: ul-ring-rotate var(--ul-speed) linear infinite;
+}
+
+.ul-ring::after {
+  border-left-color: var(--ul-color);
+  border-right-color: var(--ul-color);
+  animation: ul-ring-rotate var(--ul-speed) linear infinite reverse;
+  inset: calc(var(--ul-border-width) + 3px);
+  opacity: 0.6;
+}
+
+@keyframes ul-ring-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

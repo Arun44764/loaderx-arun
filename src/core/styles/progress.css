@@ -1,0 +1,33 @@
+/* ============================================================
+   Progress — Indeterminate progress bar
+   ============================================================ */
+
+.ul-progress {
+  width: 100%;
+  height: calc(var(--ul-border-width) + 1px);
+  background-color: var(--ul-secondary-color);
+  border-radius: 99px;
+  overflow: hidden;
+  position: relative;
+}
+
+.ul-progress::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 40%;
+  background-color: var(--ul-color);
+  border-radius: 99px;
+  animation: ul-progress-slide calc(var(--ul-speed) * 1.5) ease-in-out infinite;
+}
+
+@keyframes ul-progress-slide {
+  0% {
+    left: -40%;
+  }
+  100% {
+    left: 100%;
+  }
+}

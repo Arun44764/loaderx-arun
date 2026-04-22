@@ -1,0 +1,43 @@
+/* ============================================================
+   Bars — Oscillating vertical bars
+   ============================================================ */
+
+.ul-bars {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--ul-bar-width) * 0.5);
+  height: var(--ul-size);
+}
+
+.ul-bars__bar {
+  width: var(--ul-bar-width);
+  height: var(--ul-bar-height);
+  background-color: var(--ul-color);
+  border-radius: calc(var(--ul-bar-width) / 2);
+  animation: ul-bars-stretch var(--ul-speed) ease-in-out infinite;
+}
+
+.ul-bars__bar:nth-child(1) {
+  animation-delay: calc(var(--ul-speed) * -0.4);
+}
+.ul-bars__bar:nth-child(2) {
+  animation-delay: calc(var(--ul-speed) * -0.3);
+}
+.ul-bars__bar:nth-child(3) {
+  animation-delay: calc(var(--ul-speed) * -0.2);
+}
+.ul-bars__bar:nth-child(4) {
+  animation-delay: calc(var(--ul-speed) * -0.1);
+}
+.ul-bars__bar:nth-child(5) {
+  animation-delay: 0s;
+}
+
+@keyframes ul-bars-stretch {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+  }
+  20% {
+    transform: scaleY(1);
+  }
+}

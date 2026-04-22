@@ -1,0 +1,47 @@
+/* ============================================================
+   Orbit — A dot orbiting around a center point
+   ============================================================ */
+
+.ul-orbit {
+  width: var(--ul-size);
+  height: var(--ul-size);
+  position: relative;
+}
+
+/* Center dot */
+.ul-orbit::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--ul-dot-size) * 0.8);
+  height: calc(var(--ul-dot-size) * 0.8);
+  margin: calc(var(--ul-dot-size) * -0.4) 0 0 calc(var(--ul-dot-size) * -0.4);
+  background-color: var(--ul-color);
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+/* Orbiting dot */
+.ul-orbit::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--ul-dot-size);
+  height: var(--ul-dot-size);
+  margin-left: calc(var(--ul-dot-size) * -0.5);
+  background-color: var(--ul-color);
+  border-radius: 50%;
+  transform-origin: 50% calc(var(--ul-size) / 2);
+  animation: ul-orbit-spin var(--ul-speed) linear infinite;
+}
+
+@keyframes ul-orbit-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

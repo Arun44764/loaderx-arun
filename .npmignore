@@ -1,0 +1,16 @@
+# Source files
+src/
+examples/
+scripts/
+
+# Config files
+tsup.config.ts
+rollup.config.mjs
+tsconfig.json
+.gitignore
+.npmignore
+
+# Dev files
+node_modules/
+.git/
+*.log

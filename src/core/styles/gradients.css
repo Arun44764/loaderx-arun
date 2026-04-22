@@ -1,0 +1,94 @@
+/* ── Gradient, Glow & Neon Loaders ───────────────────────── */
+
+/* Gradient Spin */
+.ul-gradient-spin { width:var(--ul-size); height:var(--ul-size); border-radius:50%; background:conic-gradient(var(--ul-color),#8b5cf6,#ec4899,var(--ul-color)); animation:ul-spin var(--ul-speed) linear infinite; }
+.ul-gradient-spin::after { content:''; position:absolute; inset:var(--ul-border-width); background:var(--bg,#080d1a); border-radius:50%; }
+
+/* Gradient Pulse */
+.ul-gradient-pulse { width:var(--ul-size); height:var(--ul-size); border-radius:50%; background:radial-gradient(circle, var(--ul-color), #8b5cf6, #ec4899); animation:ul-pulse-anim var(--ul-speed) ease-in-out infinite; }
+
+/* Rainbow Spin */
+.ul-rainbow-spin { width:var(--ul-size); height:var(--ul-size); border-radius:50%; background:conic-gradient(red,orange,yellow,green,cyan,blue,violet,red); animation:ul-spin var(--ul-speed) linear infinite; }
+.ul-rainbow-spin::after { content:''; position:absolute; inset:var(--ul-border-width); background:var(--bg,#080d1a); border-radius:50%; }
+
+/* Rainbow Pulse */
+.ul-rainbow-pulse { width:var(--ul-size); height:var(--ul-size); border-radius:50%; animation:ul-rainbow-p var(--ul-speed) ease-in-out infinite; }
+@keyframes ul-rainbow-p { 0%{background:hsl(0,100%,60%); transform:scale(0.8);} 16%{background:hsl(60,100%,60%);} 33%{background:hsl(120,100%,60%); transform:scale(1);} 50%{background:hsl(180,100%,60%);} 66%{background:hsl(240,100%,60%); transform:scale(0.8);} 83%{background:hsl(300,100%,60%);} 100%{background:hsl(360,100%,60%); transform:scale(0.8);} }
+
+/* Neon Ring */
+.ul-neon-ring { width:var(--ul-size); height:var(--ul-size); border-radius:50%; border:calc(var(--ul-border-width)*1.5) solid var(--ul-color); animation:ul-spin var(--ul-speed) linear infinite, ul-neon-glow-pulse var(--ul-speed) ease-in-out infinite; }
+@keyframes ul-neon-glow-pulse { 0%,100%{box-shadow:0 0 5px var(--ul-color),0 0 10px var(--ul-color),0 0 20px var(--ul-color);} 50%{box-shadow:0 0 10px var(--ul-color),0 0 25px var(--ul-color),0 0 50px var(--ul-color);} }
+
+/* Neon Dots */
+.ul-neon-dots { display:inline-flex; align-items:center; gap:calc(var(--ul-dot-size)*0.6); height:var(--ul-size); }
+.ul-neon-dots::before, .ul-neon-dots::after, .ul-neon-dots .ul-d { content:''; display:block; width:var(--ul-dot-size); height:var(--ul-dot-size); border-radius:50%; background:var(--ul-color); animation:ul-neon-dot-flash var(--ul-speed) ease-in-out infinite; }
+.ul-neon-dots::after { animation-delay:calc(var(--ul-speed)*0.33); }
+.ul-neon-dots .ul-d { animation-delay:calc(var(--ul-speed)*0.66); }
+@keyframes ul-neon-dot-flash { 0%,100%{box-shadow:0 0 3px var(--ul-color); opacity:.3;} 50%{box-shadow:0 0 10px var(--ul-color),0 0 20px var(--ul-color); opacity:1;} }
+
+/* Neon Line */
+.ul-neon-line { width:100%; height:4px; border-radius:2px; background:var(--ul-color); position:relative; overflow:hidden; box-shadow:0 0 10px var(--ul-color),0 0 20px var(--ul-color); }
+.ul-neon-line::before { content:''; position:absolute; inset:0; background:linear-gradient(90deg,transparent,rgba(255,255,255,.8),transparent); animation:ul-bar-grad-move var(--ul-speed) linear infinite; }
+
+/* Neon Pulse */
+.ul-neon-pulse { width:var(--ul-size); height:var(--ul-size); border-radius:50%; border:2px solid var(--ul-color); animation:ul-neon-p var(--ul-speed) ease-in-out infinite; }
+@keyframes ul-neon-p { 0%,100%{transform:scale(0.8); box-shadow:0 0 5px var(--ul-color); opacity:.5;} 50%{transform:scale(1.1); box-shadow:0 0 20px var(--ul-color),0 0 40px var(--ul-color); opacity:1;} }
+
+/* Neon Glow */
+.ul-neon-glow { width:var(--ul-size); height:var(--ul-size); border-radius:50%; background:var(--ul-color); animation:ul-neon-glow-anim var(--ul-speed) ease-in-out infinite; }
+@keyframes ul-neon-glow-anim { 0%,100%{opacity:.3; box-shadow:0 0 5px var(--ul-color); transform:scale(0.8);} 50%{opacity:1; box-shadow:0 0 20px var(--ul-color),0 0 40px var(--ul-color),0 0 60px var(--ul-color); transform:scale(1);} }
+
+/* Plasma */
+.ul-plasma { width:var(--ul-size); height:var(--ul-size); border-radius:50%; background:radial-gradient(circle at 40% 40%,#fff 0%,var(--ul-color) 40%,#8b5cf6 70%,transparent 100%); animation:ul-plasma-anim var(--ul-speed) ease-in-out infinite; }
+@keyframes ul-plasma-anim { 0%,100%{transform:scale(1) rotate(0deg); filter:hue-rotate(0deg);} 50%{transform:scale(1.1) rotate(180deg); filter:hue-rotate(180deg);} }
+
+/* Plasma Ring */
+.ul-plasma-ring { width:var(--ul-size); height:var(--ul-size); border-radius:50%; border:calc(var(--ul-border-width)*2) solid var(--ul-color); animation:ul-spin var(--ul-speed) linear infinite, ul-plasma-ring-anim calc(var(--ul-speed)*2) ease-in-out infinite; }
+@keyframes ul-plasma-ring-anim { 0%,100%{filter:hue-rotate(0deg) drop-shadow(0 0 8px var(--ul-color));} 50%{filter:hue-rotate(360deg) drop-shadow(0 0 16px var(--ul-color));} }
+
+/* Aurora */
+.ul-aurora { width:var(--ul-size); height:calc(var(--ul-size)*0.5); border-radius:50%; position:relative; overflow:hidden; }
+.ul-aurora::before { content:''; position:absolute; inset:-50%; background:conic-gradient(from 0deg,hsl(180,100%,50%),hsl(220,100%,60%),hsl(270,100%,60%),hsl(300,100%,60%),hsl(180,100%,50%)); animation:ul-spin calc(var(--ul-speed)*3) linear infinite; border-radius:50%; }
+.ul-aurora::after { content:''; position:absolute; inset:20%; background:var(--bg,#080d1a); border-radius:50%; }
+
+/* Galaxy */
+.ul-galaxy { width:var(--ul-size); height:var(--ul-size); border-radius:50%; background:conic-gradient(from 0deg, transparent 0%, var(--ul-color) 20%, transparent 40%, rgba(139,92,246,.6) 60%, transparent 80%, var(--ul-color) 100%); animation:ul-spin calc(var(--ul-speed)*3) linear infinite; filter:blur(1px); }
+.ul-galaxy::after { content:''; position:absolute; inset:30%; border-radius:50%; background:var(--bg,#080d1a); filter:none; }
+
+/* Laser */
+.ul-laser { width:var(--ul-size); height:var(--ul-size); position:relative; }
+.ul-laser::before { content:''; position:absolute; top:50%; left:50%; width:var(--ul-border-width); height:45%; background:linear-gradient(transparent,var(--ul-color)); transform-origin:bottom center; transform:translateX(-50%) translateY(-100%); animation:ul-spin var(--ul-speed) linear infinite; filter:drop-shadow(0 0 4px var(--ul-color)); }
+.ul-laser::after { content:''; position:absolute; inset:0; border-radius:50%; border:1px solid var(--ul-secondary-color); }
+
+/* Electric Arc */
+.ul-electric-arc { width:var(--ul-size); height:var(--ul-size); border-radius:50%; position:relative; }
+.ul-electric-arc::before { content:''; position:absolute; inset:0; border-radius:50%; border:var(--ul-border-width) solid var(--ul-color); animation:ul-spin var(--ul-speed) linear infinite; border-top-color:transparent; border-bottom-color:transparent; filter:drop-shadow(0 0 6px var(--ul-color)); }
+.ul-electric-arc::after { content:''; position:absolute; inset:0; border-radius:50%; border:var(--ul-border-width) solid var(--ul-color); animation:ul-spin calc(var(--ul-speed)*0.5) linear infinite reverse; border-left-color:transparent; border-right-color:transparent; filter:drop-shadow(0 0 6px var(--ul-color)); opacity:.7; }
+
+/* Fire Ring */
+.ul-fire-ring { width:var(--ul-size); height:var(--ul-size); border-radius:50%; border:calc(var(--ul-border-width)*2) solid #f97316; animation:ul-spin var(--ul-speed) linear infinite, ul-fire-ring-anim calc(var(--ul-speed)*0.5) ease-in-out infinite alternate; }
+@keyframes ul-fire-ring-anim { from{border-color:#ef4444; filter:drop-shadow(0 0 8px #ef4444);} to{border-color:#fbbf24; filter:drop-shadow(0 0 12px #fbbf24);} }
+
+/* Holographic */
+.ul-holographic { width:var(--ul-size); height:var(--ul-size); border-radius:50%; background:conic-gradient(from 0deg,#ff0080,#ff8c00,#40e0d0,#0040ff,#ff0080); animation:ul-spin calc(var(--ul-speed)*2) linear infinite; filter:saturate(1.5) brightness(1.2); }
+.ul-holographic::after { content:''; position:absolute; inset:var(--ul-border-width); border-radius:50%; background:var(--bg,#080d1a); }
+
+/* Iridescent */
+.ul-iridescent { width:var(--ul-size); height:var(--ul-size); border-radius:50%; animation:ul-iridescent-anim calc(var(--ul-speed)*2) linear infinite; border:calc(var(--ul-border-width)*2) solid transparent; }
+@keyframes ul-iridescent-anim { 0%{border-color:hsl(0,100%,60%); box-shadow:0 0 12px hsl(0,100%,60%);} 25%{border-color:hsl(90,100%,60%); box-shadow:0 0 12px hsl(90,100%,60%);} 50%{border-color:hsl(180,100%,60%); box-shadow:0 0 12px hsl(180,100%,60%);} 75%{border-color:hsl(270,100%,60%); box-shadow:0 0 12px hsl(270,100%,60%);} 100%{border-color:hsl(360,100%,60%); box-shadow:0 0 12px hsl(360,100%,60%);} }
+
+/* Chrome */
+.ul-chrome { width:var(--ul-size); height:var(--ul-size); border-radius:50%; background:conic-gradient(from 0deg, #aaa, #fff, #888, #ddd, #aaa); animation:ul-spin calc(var(--ul-speed)*2) linear infinite; border:2px solid rgba(255,255,255,.2); }
+.ul-chrome::after { content:''; position:absolute; inset:var(--ul-border-width); border-radius:50%; background:var(--bg,#080d1a); }
+
+/* Aurora Wave */
+.ul-aurora-wave { width:calc(var(--ul-size)*2.5); height:var(--ul-size); position:relative; overflow:hidden; border-radius:8px; }
+.ul-aurora-wave::before { content:''; position:absolute; inset:0; background:linear-gradient(90deg,hsl(180,100%,50%),hsl(260,100%,60%),hsl(300,100%,60%),hsl(180,100%,50%)); background-size:200% 100%; animation:ul-aurora-shift calc(var(--ul-speed)*2) linear infinite; filter:blur(8px); }
+@keyframes ul-aurora-shift { 0%{background-position:0% 50%;} 100%{background-position:200% 50%;} }
+
+/* Prismatic */
+.ul-prismatic { width:var(--ul-size); height:var(--ul-size); border-radius:50%; border:calc(var(--ul-border-width)*2) solid transparent; background:conic-gradient(var(--ul-color),#8b5cf6,#ec4899,var(--ul-color)) border-box; animation:ul-spin calc(var(--ul-speed)*1.5) linear infinite; }
+
+/* Gradient Wave */
+.ul-gradient-wave { width:calc(var(--ul-size)*2.5); height:calc(var(--ul-border-width)*2); border-radius:2px; background:linear-gradient(90deg,transparent,var(--ul-color),#8b5cf6,#ec4899,transparent); background-size:200% 100%; animation:ul-grad-wave var(--ul-speed) linear infinite; }
+@keyframes ul-grad-wave { 0%{background-position:100% 0;} 100%{background-position:-100% 0;} }

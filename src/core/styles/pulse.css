@@ -1,0 +1,26 @@
+/* ============================================================
+   Pulse — A pulsing circle
+   ============================================================ */
+
+.ul-pulse {
+  width: var(--ul-size);
+  height: var(--ul-size);
+  border-radius: 50%;
+  background-color: var(--ul-color);
+  animation: ul-pulse-anim calc(var(--ul-speed) * 1.4) ease-in-out infinite;
+}
+
+@keyframes ul-pulse-anim {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+}
