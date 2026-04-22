@@ -1,6 +1,6 @@
 {
   "name": "loaderx-arun",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "LoaderX by Arun — 210+ zero-dependency, framework-agnostic animated UI loaders for React, Angular, Vue, vanilla JS, and SSR environments.",
   "type": "module",
   "main": "./dist/core/index.cjs",
@@ -100,11 +100,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/arun/loaderx-arun"
+    "url": "https://github.com/Arun44764/loaderx-arun.git"
   },
-  "homepage": "https://github.com/arun/loaderx-arun#readme",
+  "homepage": "https://github.com/Arun44764/loaderx-arun#readme",
   "bugs": {
-    "url": "https://github.com/arun/loaderx-arun/issues"
+    "url": "https://github.com/Arun44764/loaderx-arun/issues"
   },
   "sideEffects": [
     "**/*.css",
