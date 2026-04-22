@@ -1,6 +1,6 @@
 {
   "name": "loaderx-arun",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "LoaderX by Arun — 210+ zero-dependency, framework-agnostic animated UI loaders for React, Angular, Vue, vanilla JS, and SSR environments.",
   "type": "module",
   "main": "./dist/core/index.cjs",
