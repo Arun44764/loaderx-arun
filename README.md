@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://img.shields.io/badge/LoaderX--Arun-v1.0.0-6366f1?style=for-the-badge&logo=npm&logoColor=white" alt="LoaderX-Arun" />
+<img src="https://img.shields.io/badge/LoaderX--Arun-v1.0.4-6366f1?style=for-the-badge&logo=npm&logoColor=white" alt="LoaderX-Arun" />
 
 # ⚡ LoaderX-Arun
 
