@@ -16,7 +16,7 @@ const files = [
   'spinner.css', 'dots.css', 'pulse.css', 'bars.css',
   'ring.css', 'skeleton.css', 'progress.css', 'orbit.css',
   'spinners-advanced.css', 'dots-advanced.css', 'bars-advanced.css',
-  'shapes.css', 'gradients.css', 'tech.css', 'nature.css', 'creative.css', 'extra.css',
+  'shapes.css', 'gradients.css', 'tech.css', 'nature.css', 'creative.css', 'extra.css', 'science-tech.css',
 ];
 
 // Ensure dist exists

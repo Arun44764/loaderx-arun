@@ -1,10 +1,10 @@
 <div align="center">
 
-<img src="https://img.shields.io/badge/LoaderX--Arun-v1.0.4-6366f1?style=for-the-badge&logo=npm&logoColor=white" alt="LoaderX-Arun" />
+<img src="https://img.shields.io/badge/LoaderX--Arun-v1.1.0-6366f1?style=for-the-badge&logo=npm&logoColor=white" alt="LoaderX-Arun" />
 
 # ⚡ LoaderX-Arun
 
-### 212+ Next-Generation Animated UI Loaders
+### 500+ Next-Generation Animated UI Loaders
 
 **Zero dependencies · Pure CSS core · Works everywhere**
 
@@ -25,7 +25,7 @@
 
 | Feature | Detail |
 |---|---|
-| 🎨 **212+ Loaders** | Spinners, Dots, Bars, Shapes, Glow, Tech, Nature, Creative & more |
+| 🎨 **500+ Loaders** | Spinners, Dots, Bars, Shapes, Glow, Tech, Nature, Creative, Robotic, Science & Technology |
 | 📦 **Zero Dependencies** | Pure CSS core — no bloat, no lock-in |
 | ⚡ **Plug & Play** | One CSS file. No build step needed for vanilla HTML |
 | 🌳 **Tree-Shakable** | Import only the React components you need |
@@ -53,7 +53,7 @@ pnpm add loaderx-arun
 ### CDN (no install required)
 
 ```html
-<!-- Stylesheet only — all 212+ loaders -->
+<!-- Stylesheet only — all 500+ loaders -->
 <link rel="stylesheet" href="https://unpkg.com/loaderx-arun/dist/style.css" />
 
 <!-- UMD bundle (Web Components + utilities) -->
@@ -284,7 +284,7 @@ export class LoadingComponent {}
 
 ---
 
-## 🗂️ Loader Categories (212+ total)
+## 🗂️ Loader Categories (500+ total)
 
 | Category | Count | Examples |
 |---|---|---|
@@ -296,6 +296,9 @@ export class LoadingComponent {}
 | 💻 **Tech & UI** | 22 | `radar`, `dna`, `glitch`, `matrix`, `biometric`, `qr-scan` |
 | 🌿 **Nature** | 19 | `fire-flame`, `snowflake`, `tornado`, `petal-spin`, `meteor-shower` |
 | 🎨 **Creative & Fun** | 28 | `pacman`, `jelly`, `confetti`, `heart-beat`, `ripple-send` |
+| 🤖 **Robotic** | 96 | `robo-arm-1`, `servo-turn-1`, `android-eye-1`, `bot-face-1`, `gear-train-1` |
+| 🧪 **Science** | 97 | `quantum-spin-1`, `molecule-bond-1`, `cosmic-orbit-1`, `particle-beam-1` |
+| ⚙️ **Technology** | 97 | `neural-synapse-1`, `processor-core-1`, `cyber-shield-1`, `binary-matrix-1` |
 
 ### Sample Loader Classes
 
@@ -386,7 +389,7 @@ In React, the `label` prop customizes the hidden text:
 loaderx-arun                → Core types & utilities (ESM/CJS)
 loaderx-arun/react          → React wrapper components
 loaderx-arun/web-components → <ul-loader> custom element
-loaderx-arun/style.css      → Full bundled CSS (212+ loaders)
+loaderx-arun/style.css      → Full bundled CSS (500+ loaders)
 ```
 
 ### Build Output
@@ -405,7 +408,7 @@ dist/
 │   ├── index.js          (ESM)
 │   ├── index.cjs         (CommonJS)
 │   └── index.d.ts        (TypeScript types)
-├── style.css             (All 212+ loaders — ~30KB)
+├── style.css             (All 500+ loaders — ~350KB)
 └── loaderx-arun.umd.js   (UMD for CDN / <script> tag)
 ```
 
@@ -459,7 +462,7 @@ loaderx-arun/
 │   ├── react/                    ← React wrapper components
 │   └── web-components/           ← <ul-loader> custom element
 ├── examples/
-│   ├── vanilla/index.html        ← Interactive 212+ loader gallery
+│   ├── vanilla/index.html        ← Interactive 500+ loader gallery
 │   ├── react/App.tsx
 │   └── angular/app.component.ts
 ├── scripts/
