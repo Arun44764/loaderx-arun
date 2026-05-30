@@ -394,25 +394,7 @@ loaderx-arun/style.css      → Full bundled CSS (500+ loaders)
 
 ### Build Output
 
-```
-dist/
-├── core/
-│   ├── index.js          (ESM)
-│   ├── index.cjs         (CommonJS)
-│   └── index.d.ts        (TypeScript types)
-├── react/
-│   ├── index.js          (ESM)
-│   ├── index.cjs         (CommonJS)
-│   └── index.d.ts        (TypeScript types)
-├── web-components/
-│   ├── index.js          (ESM)
-│   ├── index.cjs         (CommonJS)
-│   └── index.d.ts        (TypeScript types)
-├── style.css             (All 500+ loaders — ~350KB)
-└── loaderx-arun.umd.js   (UMD for CDN / <script> tag)
-```
 
----
 
 ## 🛠️ Development
 
@@ -437,41 +419,6 @@ npx http-server . -p 4242
 
 # Clean dist folder
 npm run clean
-```
-
-### Project Structure
-
-```
-loaderx-arun/
-├── src/
-│   ├── core/
-│   │   ├── index.ts              ← Types, constants, utilities
-│   │   └── styles/
-│   │       ├── variables.css     ← CSS custom properties
-│   │       ├── base.css          ← Base .ul-loader class
-│   │       ├── spinner.css       ← Original 8 loaders
-│   │       ├── spinners-advanced.css
-│   │       ├── dots-advanced.css
-│   │       ├── bars-advanced.css
-│   │       ├── shapes.css
-│   │       ├── gradients.css
-│   │       ├── tech.css
-│   │       ├── nature.css
-│   │       ├── creative.css
-│   │       └── extra.css         ← Extra pack
-│   ├── react/                    ← React wrapper components
-│   └── web-components/           ← <ul-loader> custom element
-├── examples/
-│   ├── vanilla/index.html        ← Interactive 500+ loader gallery
-│   ├── react/App.tsx
-│   └── angular/app.component.ts
-├── scripts/
-│   └── build-css.mjs             ← CSS bundler script
-├── dist/                         ← Build output (git-ignored)
-├── tsup.config.ts
-├── rollup.config.mjs
-└── package.json
-```
 
 ### Adding a New Loader
 
